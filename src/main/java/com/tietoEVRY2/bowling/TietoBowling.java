@@ -11,8 +11,8 @@ public class TietoBowling {
         bowling.throwBall(1,5, "Artjom");
         bowling.throwBall(1,5, "Artjom");
         bowling.throwBall(1,5, "Artjom");
-        bowling.throwBall(5,5, "Artjom");
-        bowling.throwBall(5,5, "Artjom");
+        bowling.throwBall(1,5, "Artjom");
+        bowling.throwBall(1,5, "Artjom");
         bowling.throwBall(1,5, "Artjom");
         bowling.throwBall(1,5, "Artjom");
         bowling.throwBall(1,5, "Artjom");
