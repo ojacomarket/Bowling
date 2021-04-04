@@ -36,7 +36,19 @@ public class ScoreBoard {
         //totalScore.total = 0;
         //for (int frame = 0; frame < 10; frame++) {
         Frames frameStart = new Frames();
-
+       /* if (frameTracker > 1) {
+            if (tdb.gameStatus.get(frameTracker - 2) == STATUS.STRIKE && tdb.gameStatus.get(frameTracker - 1) == STATUS.STRIKE) {
+                if (frameTracker - 2 == 0) {
+                    frames.get(frameTracker - 2).scoreToCount = tdb.totalScore + roll1;
+                    tdb.totalScore += frames.get(frameTracker - 2).scoreToCount;
+                } else {
+                    frames.get(frameTracker - 2).scoreToCount = tdb.totalScore;
+                    tdb.totalScore += frames.get(frameTracker - 2).scoreToCount;
+                    //frames.get(frameTracker - 1).scoreToCount = tdb.totalScore;
+                    // frames.get(frameTracker - 1).scoreToCount = tdb.totalScore + ;
+                }
+            }
+        }*/
            /* if (frameTracker > 8) {
                 System.out.println("IM HERE!"); //proceeded
                 frames.add(frameStart);
@@ -52,69 +64,39 @@ public class ScoreBoard {
             roll2 = 0;
             frameStart.scoreToCount = 0;
             frames.add(frameStart);
-            if (frameTracker > 1) {
-                if (tdb.gameStatus.get(frameTracker - 2) == STATUS.STRIKE && tdb.gameStatus.get(frameTracker - 1) == STATUS.STRIKE) {
-                    frames.get(frameTracker - 2).scoreToCount = tdb.totalScore + 10;
-                    tdb.totalScore += frames.get(frameTracker - 2).scoreToCount;
-                    //frames.get(frameTracker - 1).scoreToCount = tdb.totalScore;
-                    // frames.get(frameTracker - 1).scoreToCount = tdb.totalScore + ;
-                }
+            tdb.totalScore += 10;
+            if (frameTracker > 1 && tdb.gameStatus.get(frameTracker - 2) == STATUS.STRIKE && tdb.gameStatus.get(frameTracker-1) == STATUS.STRIKE) {
+                frames.get(frameTracker - 2).scoreToCount = tdb.totalScore;
+                tdb.totalScore = frames.get(frameTracker - 2).scoreToCount + 20;
             }
-            //TRUE!!!!!!!!!!!!!
-            // if (roll1 == 10) {
-
-            else {
-                tdb.totalScore += 10;
-
-                // System.err.println(tdb.gameStatus.get(frameTracker));
-                // continue;
             }
-        }
+
         else {
-            // roll2 = Throwing_BALL.throwBall(2, roll1);
-
             if (roll1 + roll2 == 10) {
                 tdb.gameStatus.add(STATUS.SPARE);
                 frameStart.roll2 = roll2;
                 tdb.totalScore += 10;
-                //frameStart.scoreToCount = totalScore.total; //10 always
                 frameStart.scoreToCount = 0;
                 frames.add(frameStart);
-                //System.err.println(tdb.gameStatus.get(frameTracker));
+                if (frameTracker > 1 && tdb.gameStatus.get(frameTracker - 2) == STATUS.STRIKE && tdb.gameStatus.get(frameTracker-1) == STATUS.STRIKE) {
+                    frames.get(frameTracker - 2).scoreToCount = tdb.totalScore - roll2;
+                    tdb.totalScore = frames.get(frameTracker - 2).scoreToCount + roll1 + roll2 + 10;
+                }
             } else {
                 tdb.gameStatus.add(STATUS.NORMAL);
                 frameStart.roll2 = roll2;
                 tdb.totalScore += roll1 + roll2;
                 frameStart.scoreToCount = tdb.totalScore;
-                /**
-                 * here we are 2
-                 */
+                System.out.println(tdb.totalScore + "TOTAL");
                 frames.add(frameStart);
-                /**
-                 * here twice
-                 */
-                //System.err.println(tdb.gameStatus.get(frameTracker));
-                /**
-                 * tut naebka
-                 */
+                if (frameTracker > 1 && tdb.gameStatus.get(frameTracker - 2) == STATUS.STRIKE && tdb.gameStatus.get(frameTracker-1) == STATUS.STRIKE) {
+                    frames.get(frameTracker - 2).scoreToCount = tdb.totalScore - roll2;
+                    tdb.totalScore = frames.get(frameTracker - 2).scoreToCount + roll1 + roll2 + 10;
+                }
             }
         }
 
-        /**
-         * here naebalis
-         */
-
         if (frameTracker >= 1) {
-            if (frameTracker > 1) {
-                if (tdb.gameStatus.get(frameTracker - 2) == STATUS.STRIKE && tdb.gameStatus.get(frameTracker - 1) == STATUS.STRIKE &&
-                        tdb.gameStatus.get(frameTracker) == STATUS.SPARE) {
-                    frames.get(frameTracker - 2).scoreToCount = tdb.totalScore;
-                    tdb.totalScore += frames.get(frameTracker - 2).scoreToCount;
-                    frames.get(frameTracker - 1).scoreToCount = tdb.totalScore + 10;
-                    //frames.get(frameTracker - 1).scoreToCount = tdb.totalScore;
-                    // frames.get(frameTracker - 1).scoreToCount = tdb.totalScore + ;
-                }
-            }
                 if (tdb.gameStatus.get(frameTracker - 1) == STATUS.STRIKE && tdb.gameStatus.get(frameTracker) == STATUS.SPARE) {
                     frames.get(frameTracker - 1).scoreToCount = tdb.totalScore;
                     tdb.totalScore = frames.get(frameTracker - 1).scoreToCount + 10;
@@ -130,7 +112,7 @@ public class ScoreBoard {
                     //totalScore.total += roll1 + 10;
                 } else if (tdb.gameStatus.get(frameTracker - 1) == STATUS.SPARE && tdb.gameStatus.get(frameTracker) == STATUS.STRIKE) {
                     frames.get(frameTracker - 1).scoreToCount = tdb.totalScore;
-                    tdb.totalScore = frames.get(frameTracker - 1).scoreToCount;
+                    tdb.totalScore = frames.get(frameTracker - 1).scoreToCount + 10;
                     //totalScore.total += 20;
                 } else if (tdb.gameStatus.get(frameTracker - 1) == STATUS.SPARE && tdb.gameStatus.get(frameTracker) == STATUS.SPARE) {
                     frames.get(frameTracker - 1).scoreToCount = tdb.totalScore - roll2;
