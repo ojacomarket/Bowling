@@ -8,7 +8,7 @@ public class TietoBowling {
         BowlingGame bowling = new BowlingGame();
         bowling.init("Artjom","Alina");
         bowling.playerNames.forEach(System.out::println);
-        bowling.throwBall(5,5, "Artjom");
+        bowling.throwBall(1,5, "Artjom");
         bowling.throwBall(5,5, "Artjom");
         bowling.throwBall(5,5, "Artjom");
         bowling.throwBall(5,5, "Artjom");
