@@ -13,9 +13,9 @@ public class TietoBowling {
         bowling.throwBall(5,5, "Artjom");
         bowling.throwBall(10,0, "Artjom");
         bowling.throwBall(10,0, "Artjom");
-        bowling.throwBall(10,0, "Artjom");
-        bowling.throwBall(10,0, "Artjom");
-        bowling.throwBall(10,0, "Artjom");
+        bowling.throwBall(5,5, "Artjom");
+        bowling.throwBall(5,5, "Artjom");
+        bowling.throwBall(5,5, "Artjom");
         System.out.println(bowling.scoreBoards.get(0).getFrames().get(0).scoreToCount);
         System.out.println(bowling.scoreBoards.get(0).getFrames().get(1).scoreToCount);
         System.out.println(bowling.scoreBoards.get(0).getCurrentScores().get(1).totalScore);
