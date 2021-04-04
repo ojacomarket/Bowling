@@ -13,8 +13,8 @@ public class TietoBowling {
         bowling.throwBall(1,5, "Artjom");
         bowling.throwBall(1,5, "Artjom");
         bowling.throwBall(1,5, "Artjom");
-        bowling.throwBall(1,5, "Artjom");
-        bowling.throwBall(1,5, "Artjom");
+        bowling.throwBall(10,0, "Artjom");
+        bowling.throwBall(10,0, "Artjom");
         bowling.throwBall(10,0, "Artjom");
         System.out.println(bowling.scoreBoards.get(0).getFrames().get(0).scoreToCount);
         System.out.println(bowling.scoreBoards.get(0).getFrames().get(1).scoreToCount);
