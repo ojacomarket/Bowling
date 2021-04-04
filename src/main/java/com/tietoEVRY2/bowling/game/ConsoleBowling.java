@@ -29,6 +29,8 @@ public class ConsoleBowling {
         String playerFullTableConsole = "| %-15s | %-7d | %-7d| %-7d| %n";
         String playerFullTableConsole2 = "| %-15s | %-7s | %-7s| %-7d| %n";
         String playerFullTableConsole3 = "| %-15s | %-7d | %-7s| %-7d| %n";
+        String playerFullTableConsole4 = "| %-15s | %-7d | %-7s| %-7s| %n";
+        String playerFullTableConsole5 = "| %-15s | %-7s | %-7s| %-7s| %n";
         String strike;
         String spare;
 
@@ -43,12 +45,22 @@ public class ConsoleBowling {
                     .get(scoreBoards.indexOf(sample))
                     .getFrames().size(); throwsMade++) {
                 if (sample.getFrames().get(throwsMade).roll1 == 10) {
-                    System.out.format(playerFullTableConsole2, "Frame nr " + throwsMade, "X",
-                            " ", sample.getFrames().get(throwsMade).scoreToCount);
+                    if (sample.getFrames().get(throwsMade).scoreToCount == 0) {
+                        System.out.format(playerFullTableConsole5, "Frame nr " + throwsMade, "X",
+                                " ", " ");
+                    } else {
+                        System.out.format(playerFullTableConsole2, "Frame nr " + throwsMade, "X",
+                                " ", sample.getFrames().get(throwsMade).scoreToCount);
+                    }
                 }
                 else if (sample.getFrames().get(throwsMade).roll1 + sample.getFrames().get(throwsMade).roll2 == 10){
-                    System.out.format(playerFullTableConsole3, "Frame nr " + throwsMade, sample.getFrames().get(throwsMade).roll1,
-                            "/", sample.getFrames().get(throwsMade).scoreToCount);
+                    if (sample.getFrames().get(throwsMade).scoreToCount == 0) {
+                        System.out.format(playerFullTableConsole4, "Frame nr " + throwsMade, sample.getFrames().get(throwsMade).roll1,
+                                "/", " ");
+                    } else {
+                        System.out.format(playerFullTableConsole3, "Frame nr " + throwsMade, sample.getFrames().get(throwsMade).roll1,
+                                "/", sample.getFrames().get(throwsMade).scoreToCount);
+                    }
                 }
                 else {
                     System.out.format(playerFullTableConsole, "Frame nr " + throwsMade, sample.getFrames().get(throwsMade).roll1,
