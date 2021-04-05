@@ -40,14 +40,14 @@ public class ScoreBoard {
         if (roll1 == 10) {
             HandleStrike.handle_strike(tdb, frameStart, roll2, frames);
             if (FrameCombinations.strike_strike(frameTracker, tdb)) {
-                HandleFrameCombos.handle_strike_strike(frames, frameTracker, tdb);
+                HandleFrameCombos.handle_strike_strike_strike(frames, frameTracker, tdb);
             }
             }
 
         else {
             if (roll1 + roll2 == 10) {
                 HandleSpare.handle_spare(tdb,frameStart,roll2,frames);
-                if (frameTracker > 1 && tdb.gameStatus.get(frameTracker - 2) == STATUS.STRIKE && tdb.gameStatus.get(frameTracker-1) == STATUS.STRIKE) {
+                if (FrameCombinations.strike_strike(frameTracker, tdb)) {
                     frames.get(frameTracker - 2).scoreToCount = tdb.totalScore - roll2;
                     tdb.totalScore = frames.get(frameTracker - 2).scoreToCount + roll1 + roll2 + 10;
                 }
