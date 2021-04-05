@@ -13,8 +13,10 @@ public class PlayBonusGame {
     public int frameNr;
 
     public void playBonusGame(int roll1, int roll2, int roll3) {
+        System.out.println(frameNr);
         List<STATUS> localRollStatus = new ArrayList<>();
         db.totalScore += roll1;
+        frames.add(new Frames());
         frames.get(frameNr).roll1 = roll1;
         if (roll1 == 10) {
             localRollStatus.add(STATUS.STRIKE);
@@ -44,11 +46,20 @@ public class PlayBonusGame {
             frames.get(frameNr).roll3 = roll3;
         }
 
-        if (db.gameStatus.get(frameNr - 1) == STATUS.STRIKE && localRollStatus.get(0) == STATUS.STRIKE) {
+        if (db.gameStatus.get(frameNr - 2) == STATUS.STRIKE && db.gameStatus.get(frameNr - 1) == STATUS.STRIKE &&
+                localRollStatus.get(0) == STATUS.STRIKE) {
+            frames.get(frameNr - 2).scoreToCount = db.totalScore - roll3 - roll2;
+            db.totalScore = frames.get(frameNr - 2).scoreToCount + roll1 + 10 + roll2 + roll3;
+            frames.get(frameNr-1).scoreToCount = db.totalScore - roll3;
+            db.totalScore = frames.get(frameNr - 1).scoreToCount + roll1 + roll2 + roll3 ;
+            frames.get(frameNr).scoreToCount = db.totalScore;
+        }
+        else if (db.gameStatus.get(frameNr - 1) == STATUS.STRIKE && localRollStatus.get(0) == STATUS.STRIKE) {
             frames.get(frameNr - 1).scoreToCount = db.totalScore - roll3;
-            db.totalScore = frames.get(frameNr - 1).scoreToCount + 10;
-            frames.get(frameNr).scoreToCount = db.totalScore + roll2 + roll3;
-        } else if (db.gameStatus.get(frameNr - 1) == STATUS.SPARE && localRollStatus.get(0) == STATUS.STRIKE) {
+            db.totalScore = frames.get(frameNr - 1).scoreToCount + roll1 + roll2;
+            frames.get(frameNr).scoreToCount = db.totalScore + roll3;
+        }
+        else if (db.gameStatus.get(frameNr - 1) == STATUS.SPARE && localRollStatus.get(0) == STATUS.STRIKE) {
             frames.get(frameNr - 1).scoreToCount = db.totalScore - roll2 - roll3;
             db.totalScore = frames.get(frameNr - 1).scoreToCount + 10;
             frames.get(frameNr).scoreToCount = db.totalScore + roll2 + roll3;
@@ -72,7 +83,7 @@ public class PlayBonusGame {
         } else if (db.gameStatus.get(frameNr - 1) == STATUS.SPARE &&
                 localRollStatus.get(1) == STATUS.NORMAL) {
             frames.get(frameNr - 1).scoreToCount = db.totalScore - roll2;
-            db.totalScore = frames.get(frameNr - 1).scoreToCount + 10;
+            db.totalScore = frames.get(frameNr - 1).scoreToCount + roll1 + roll2;
             frames.get(frameNr).scoreToCount = db.totalScore;
             db.totalScore = frames.get(frameNr).scoreToCount;
         } else if (localRollStatus.get(0) == STATUS.NORMAL && localRollStatus.get(1) == STATUS.NORMAL &&
@@ -82,7 +93,7 @@ public class PlayBonusGame {
         } else if (db.gameStatus.get(frameNr - 1) == STATUS.STRIKE && localRollStatus.get(0) == STATUS.NORMAL &&
                 (localRollStatus.get(1) == STATUS.NORMAL || localRollStatus.get(1) == STATUS.SPARE)) {
             frames.get(frameNr - 1).scoreToCount = db.totalScore;
-            db.totalScore = frames.get(frameNr - 1).scoreToCount + 10;
+            db.totalScore = frames.get(frameNr - 1).scoreToCount + roll1+roll2;
             frames.get(frameNr).scoreToCount = db.totalScore;
         } else if (localRollStatus.get(0) == STATUS.STRIKE) {
             frames.get(frameNr).scoreToCount = db.totalScore;
