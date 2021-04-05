@@ -33,34 +33,8 @@ public class ScoreBoard {
         if (roll1 + roll2 > 10) {
             throw new FrameScoreOutOfBoundariesException();
         }
-        //tdb.rollsInFrame = new ArrayList<>();
-        //tdb.gameStatus = new ArrayList<>();
-        //TOTAL_ScORE totalScore = new TOTAL_ScORE();
-        //totalScore.total = 0;
-        //for (int frame = 0; frame < 10; frame++) {
         Frames frameStart = new Frames();
-       /* if (frameTracker > 1) {
-            if (tdb.gameStatus.get(frameTracker - 2) == STATUS.STRIKE && tdb.gameStatus.get(frameTracker - 1) == STATUS.STRIKE) {
-                if (frameTracker - 2 == 0) {
-                    frames.get(frameTracker - 2).scoreToCount = tdb.totalScore + roll1;
-                    tdb.totalScore += frames.get(frameTracker - 2).scoreToCount;
-                } else {
-                    frames.get(frameTracker - 2).scoreToCount = tdb.totalScore;
-                    tdb.totalScore += frames.get(frameTracker - 2).scoreToCount;
-                    //frames.get(frameTracker - 1).scoreToCount = tdb.totalScore;
-                    // frames.get(frameTracker - 1).scoreToCount = tdb.totalScore + ;
-                }
-            }
-        }*/
-           /* if (frameTracker > 8) {
-                System.out.println("IM HERE!"); //proceeded
-                frames.add(frameStart);
-                PlayBonusGame bonusFrame = new PlayBonusGame(tdb,frames, frameTracker);
-                bonusFrame.playBonusGame(roll1, roll2, roll3);
-                //ConsoleBowling start = new ConsoleBowling(playerName, frames);
-                //start.playBowlingInConsole();
-                return;
-            }*/
+
         frameStart.roll1 = roll1;
         if (roll1 == 10) {
             HandleStrike.handle_strike(tdb, frameStart, roll2, frames);
@@ -115,13 +89,9 @@ public class ScoreBoard {
                 } else if (tdb.gameStatus.get(frameTracker - 1) == STATUS.SPARE && tdb.gameStatus.get(frameTracker) == STATUS.SPARE) {
                     frames.get(frameTracker - 1).scoreToCount = tdb.totalScore - roll2;
                     tdb.totalScore = frames.get(frameTracker - 1).scoreToCount + 10;
-                    //frames.get(frame).scoreToCount = frames.get(frame - 1).scoreToCount + roll1;
-                    //totalScore.total += 20;
                 }
             }
-
         currentScores.add(tdb);
-        System.out.println("And here twice!");
 
     }
 }
