@@ -30,7 +30,7 @@ public class BowlingGame {
                     .filter(x -> whoIsThrowing.equals(x.getPlayerName()))
                     .findAny()
                     .orElse(null);
-            scoreBoards.get(scoreBoards.indexOf(sample)).playBowling(roll1, roll2);
+            scoreBoards.get(scoreBoards.indexOf(sample)).playFrame(roll1, roll2);
         } catch (FrameScoreOutOfBoundariesException fsobe) {
             System.out.println("Lol");
         }
@@ -44,7 +44,7 @@ public class BowlingGame {
         scoreBoards.get(0).setFrameTracker(scoreBoards.get(0).getFrameTracker() +1);
         PlayBonusGame playBonusFrame = new PlayBonusGame(scoreBoards.get(0).getTdb(), scoreBoards.get(scoreBoards.indexOf(sample)).getFrames(),
                 scoreBoards.get(0).getFrameTracker());
-        playBonusFrame.playBonusGame(roll1, roll2, roll3);
+        playBonusFrame.playBonusFrame(roll1, roll2, roll3);
     }
 
     public void reset() {
