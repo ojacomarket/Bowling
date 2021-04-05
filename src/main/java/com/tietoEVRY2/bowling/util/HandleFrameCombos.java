@@ -10,4 +10,33 @@ public abstract class HandleFrameCombos {
         frames.get(frameTracker - 2).scoreToCount = tdb.totalScore;
         tdb.totalScore = frames.get(frameTracker - 2).scoreToCount + 20;
     }
+
+    public static void handle_strike_strike_spare(List<Frames> frames, int frameTracker, TABLE_DATABASE tdb, int roll2, int roll1) {
+        frames.get(frameTracker - 2).scoreToCount = tdb.totalScore - roll2;
+        tdb.totalScore = frames.get(frameTracker - 2).scoreToCount + roll1 + roll2 + 10;
+    }
+
+    public static void handle_strike_spare(List<Frames> frames, int frameTracker, TABLE_DATABASE tdb) {
+        frames.get(frameTracker - 1).scoreToCount = tdb.totalScore;
+        tdb.totalScore = frames.get(frameTracker - 1).scoreToCount + 10;
+    }
+
+    public static void handle_strike_normal(List<Frames> frames, int frameTracker, TABLE_DATABASE tdb, int roll1, int roll2) {
+        frames.get(frameTracker - 1).scoreToCount = tdb.totalScore;
+        tdb.totalScore = frames.get(frameTracker - 1).scoreToCount + roll1 + roll2;
+        frames.get(frameTracker).scoreToCount = tdb.totalScore;
+    }
+    public static void handle_spare_normal(List<Frames> frames, int frameTracker, TABLE_DATABASE tdb, int roll1, int roll2) {
+        frames.get(frameTracker - 1).scoreToCount = tdb.totalScore - roll2;
+        tdb.totalScore = frames.get(frameTracker - 1).scoreToCount + roll1 + roll2;
+        frames.get(frameTracker).scoreToCount = tdb.totalScore;
+    }
+    public static void handle_spare_strike(List<Frames> frames, int frameTracker, TABLE_DATABASE tdb) {
+        frames.get(frameTracker - 1).scoreToCount = tdb.totalScore;
+        tdb.totalScore = frames.get(frameTracker - 1).scoreToCount + 10;
+    }
+    public static void handle_spare_spare(List<Frames> frames, int frameTracker, TABLE_DATABASE tdb, int roll2) {
+        frames.get(frameTracker - 1).scoreToCount = tdb.totalScore - roll2;
+        tdb.totalScore = frames.get(frameTracker - 1).scoreToCount + 10;
+    }
 }
