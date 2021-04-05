@@ -1,12 +1,12 @@
 package com.tietoEVRY2.bowling.game;
 
-import com.tietoEVRY2.bowling.WrongNameOrPinsException;
+import com.tietoEVRY2.bowling.exceptions.WrongNameOrPinsException;
 import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.tietoEVRY2.bowling.Scoring.*;
+import static com.tietoEVRY2.bowling.util.Scoring.*;
 
 @Getter
 @Setter
