@@ -1,6 +1,7 @@
 package com.tietoEVRY2.bowling.game;
 
-import com.tietoEVRY2.bowling.ThrowBonus;
+import com.tietoEVRY2.bowling.util.FrameCombinations;
+import com.tietoEVRY2.bowling.util.HandleFrameCombosBonus;
 import lombok.AllArgsConstructor;
 
 import java.util.ArrayList;
@@ -12,7 +13,7 @@ public class PlayBonusGame {
     public List<Frames> frames;
     public int frameNr;
 
-    public void playBonusGame(int roll1, int roll2, int roll3) {
+    public void playBonusFrame(int roll1, int roll2, int roll3) {
         System.out.println(frameNr);
         List<STATUS> localRollStatus = new ArrayList<>();
         db.totalScore += roll1;
@@ -35,15 +36,9 @@ public class PlayBonusGame {
 
         } else {
             localRollStatus.add(STATUS.NORMAL);
-
         }
-        if (localRollStatus.get(0) == STATUS.STRIKE || localRollStatus.get(1) == STATUS.SPARE) {
-            /*if (localRollStatus.get(1) == STATUS.STRIKE) {
-                db.totalScore += roll3;
-            } else {*/
-                db.totalScore += roll3;
-            //}
-            frames.get(frameNr).roll3 = roll3;
+        if (FrameCombinations.strike_spare_bonusFrame(localRollStatus)) {
+            HandleFrameCombosBonus.handle_strike_spare_bonus(db,frames,frameNr,roll3);
         }
 
         if (db.gameStatus.get(frameNr - 2) == STATUS.STRIKE && db.gameStatus.get(frameNr - 1) == STATUS.STRIKE &&
