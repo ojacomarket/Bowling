@@ -1,12 +1,10 @@
 package com.tietoEVRY2.bowling.game;
 
-import com.tietoEVRY2.bowling.WrongNameOrPinsException;
-import com.tietoEVRY2.bowling.util.CheckPlayerExistance;
-import org.apache.commons.lang3.StringUtils;
+import com.tietoEVRY2.bowling.util.DisplayScoreOrThrowException;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
+
+import static com.tietoEVRY2.bowling.util.CheckPlayerExistance.*;
 
 public class BowlingGame {
     public static GameStatus status;
@@ -25,39 +23,12 @@ public class BowlingGame {
         status = GameStatus.FINISH;
     }
 
-    public void throwBall(int roll1, int roll2, String whoIsThrowing){
-        if (roll1 + roll2 > 10 || StringUtils.isEmpty(whoIsThrowing) || playerNames.stream().noneMatch(x -> x.equals(whoIsThrowing)))
-            {
-            throw new WrongNameOrPinsException("You have only 10 pins and unregistered players cannot play!");
-        }
-        try {
-            ScoreBoard sample = scoreBoards.stream()
-                    .filter(x -> whoIsThrowing.equals(x.getPlayerName()))
-                    .findAny()
-                    .orElse(null);
-            scoreBoards.get(scoreBoards.indexOf(sample)).playFrame(roll1, roll2);
-        }
-        catch (WrongNameOrPinsException oneOfTwo) {
-            System.out.println(oneOfTwo.getMessage());
-        }
+    public void throwBall(int roll1, int roll2, String whoIsThrowing) {
+        checkPlayerValidity(roll1, roll2, whoIsThrowing, playerNames, scoreBoards);
     }
 
     public void throwBall(int roll1, int roll2, int roll3, String whoIsThrowing) {
-        if (CheckPlayerExistance.isValidPlayer(roll1,roll2,whoIsThrowing,playerNames)) {
-            throw new WrongNameOrPinsException("You have only 10 pins and unregistered players cannot play!");
-        }
-        try {
-            ScoreBoard sample = scoreBoards.stream()
-                    .filter(x -> whoIsThrowing.equals(x.getPlayerName()))
-                    .findAny()
-                    .orElse(null);
-            scoreBoards.get(0).setFrameTracker(scoreBoards.get(0).getFrameTracker() + 1);
-            PlayBonusGame playBonusFrame = new PlayBonusGame(scoreBoards.get(0).getTdb(), scoreBoards.get(scoreBoards.indexOf(sample)).getFrames(),
-                    scoreBoards.get(0).getFrameTracker());
-            playBonusFrame.playBonusFrame(roll1, roll2, roll3);
-        } catch (WrongNameOrPinsException oneOfTwo) {
-            System.out.println(oneOfTwo.getMessage());
-        }
+        checkPlayerValidityBonus(roll1, roll2, roll3, whoIsThrowing, playerNames, scoreBoards);
     }
 
     public void reset() {
@@ -66,9 +37,9 @@ public class BowlingGame {
         scoreBoards.clear();
     }
 
-    public int showCurrentScore(BowlingGame bowling) {
-        return bowling.scoreBoards.get(bowling.scoreBoards.indexOf(
-                CheckPlayerExistance.checkExistance("Artjom", bowling.scoreBoards))).getTdb().totalScore;
+    public int showCurrentScore(BowlingGame bowling, String forWhom) {
+        int score = 0;
+        DisplayScoreOrThrowException.validateScoreTable(score, bowling, forWhom);
+        return score;
     }
 }
-
