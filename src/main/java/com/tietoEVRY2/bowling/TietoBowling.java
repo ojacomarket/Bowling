@@ -27,7 +27,7 @@ public class TietoBowling {
        bowling.throwBall(10,0, "Artjom");
         System.out.println(bowling.scoreBoards.get(0).getFrameTracker());
         System.err.println(bowling.scoreBoards.get(0).getCurrentScores().get(1).totalScore);
-        bowling.throwBall(5,5, 1, "Artjom");
+        bowling.throwBall(5,3, 0, "Artjom");
         System.out.println(bowling.scoreBoards.get(0).getFrameTracker());
         //System.err.println(bowling.scoreBoards.get(0).getFrames().get(0).scoreToCount);
         //System.out.println(bowling.scoreBoards.get(0).getFrames().get(0).scoreToCount);
