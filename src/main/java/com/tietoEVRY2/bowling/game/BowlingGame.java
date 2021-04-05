@@ -1,7 +1,8 @@
 package com.tietoEVRY2.bowling.game;
 
-import com.tietoEVRY2.bowling.FrameScoreOutOfBoundariesException;
+import com.tietoEVRY2.bowling.WrongNameOrPinsException;
 import com.tietoEVRY2.bowling.util.CheckPlayerExistance;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -24,28 +25,39 @@ public class BowlingGame {
         status = GameStatus.FINISH;
     }
 
-    public void throwBall(int roll1, int roll2, String whoIsThrowing) {
-
+    public void throwBall(int roll1, int roll2, String whoIsThrowing){
+        if (roll1 + roll2 > 10 || StringUtils.isEmpty(whoIsThrowing) || playerNames.stream().noneMatch(x -> x.equals(whoIsThrowing)))
+            {
+            throw new WrongNameOrPinsException("You have only 10 pins and unregistered players cannot play!");
+        }
         try {
             ScoreBoard sample = scoreBoards.stream()
                     .filter(x -> whoIsThrowing.equals(x.getPlayerName()))
                     .findAny()
                     .orElse(null);
             scoreBoards.get(scoreBoards.indexOf(sample)).playFrame(roll1, roll2);
-        } catch (FrameScoreOutOfBoundariesException fsobe) {
-            System.out.println("Lol");
+        }
+        catch (WrongNameOrPinsException oneOfTwo) {
+            System.out.println(oneOfTwo.getMessage());
         }
     }
 
     public void throwBall(int roll1, int roll2, int roll3, String whoIsThrowing) {
-        ScoreBoard sample = scoreBoards.stream()
-                .filter(x -> whoIsThrowing.equals(x.getPlayerName()))
-                .findAny()
-                .orElse(null);
-        scoreBoards.get(0).setFrameTracker(scoreBoards.get(0).getFrameTracker() + 1);
-        PlayBonusGame playBonusFrame = new PlayBonusGame(scoreBoards.get(0).getTdb(), scoreBoards.get(scoreBoards.indexOf(sample)).getFrames(),
-                scoreBoards.get(0).getFrameTracker());
-        playBonusFrame.playBonusFrame(roll1, roll2, roll3);
+        if (CheckPlayerExistance.isValidPlayer(roll1,roll2,whoIsThrowing,playerNames)) {
+            throw new WrongNameOrPinsException("You have only 10 pins and unregistered players cannot play!");
+        }
+        try {
+            ScoreBoard sample = scoreBoards.stream()
+                    .filter(x -> whoIsThrowing.equals(x.getPlayerName()))
+                    .findAny()
+                    .orElse(null);
+            scoreBoards.get(0).setFrameTracker(scoreBoards.get(0).getFrameTracker() + 1);
+            PlayBonusGame playBonusFrame = new PlayBonusGame(scoreBoards.get(0).getTdb(), scoreBoards.get(scoreBoards.indexOf(sample)).getFrames(),
+                    scoreBoards.get(0).getFrameTracker());
+            playBonusFrame.playBonusFrame(roll1, roll2, roll3);
+        } catch (WrongNameOrPinsException oneOfTwo) {
+            System.out.println(oneOfTwo.getMessage());
+        }
     }
 
     public void reset() {
