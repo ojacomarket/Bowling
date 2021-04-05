@@ -36,6 +36,16 @@ public class BowlingGame {
         }
     }
 
+    public void throwBall(int roll1, int roll2, int roll3, String whoIsThrowing) {
+        ScoreBoard sample = scoreBoards.stream()
+                .filter(x -> whoIsThrowing.equals(x.getPlayerName()))
+                .findAny()
+                .orElse(null);
+        PlayBonusGame playBonusFrame = new PlayBonusGame(scoreBoards.get(0).getTdb(), scoreBoards.get(scoreBoards.indexOf(sample)).getFrames(),
+                scoreBoards.get(0).getFrameTracker());
+        playBonusFrame.playBonusGame(roll1, roll2, roll3);
+    }
+
     public void reset() {
 
         playerNames.clear();
