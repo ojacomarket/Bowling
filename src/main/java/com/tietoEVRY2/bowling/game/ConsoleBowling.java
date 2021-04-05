@@ -5,13 +5,11 @@ import java.util.List;
 public class ConsoleBowling {
 
     public String name;
-    public List<Frames> frames;
-    public int frameNr = 5;
-    private List<ScoreBoard> scoreBoards;
+   // private List<ScoreBoard> scoreBoards;
 
     public void showFullPlayerTable(String player, List<ScoreBoard> scoreBoardsIncoming) {
 
-        scoreBoards = scoreBoardsIncoming;
+        List<ScoreBoard> scoreBoards = scoreBoardsIncoming;
         String playerFullTableConsole = "| %-15s | %-7d | %-7d| %-7d| %n";
         String playerFullTableConsole2 = "| %-15s | %-7s | %-7s| %-7d| %n";
         String playerFullTableConsole3 = "| %-15s | %-7d | %-7s| %-7d| %n";
