@@ -1,10 +1,7 @@
 package com.tietoEVRY2.bowling.game;
 
 import com.tietoEVRY2.bowling.FrameScoreOutOfBoundariesException;
-import com.tietoEVRY2.bowling.util.FrameCombinations;
-import com.tietoEVRY2.bowling.util.HandleFrameCombos;
-import com.tietoEVRY2.bowling.util.HandleSpare;
-import com.tietoEVRY2.bowling.util.HandleStrike;
+import com.tietoEVRY2.bowling.util.*;
 import lombok.*;
 
 import java.util.ArrayList;
@@ -51,15 +48,9 @@ public class ScoreBoard {
                     HandleFrameCombos.handle_strike_strike_spare(frames,frameTracker,tdb,roll2,roll1);
                 }
             } else {
-                tdb.gameStatus.add(STATUS.NORMAL);
-                frameStart.roll2 = roll2;
-                tdb.totalScore += roll1 + roll2;
-                frameStart.scoreToCount = tdb.totalScore;
-                System.out.println(tdb.totalScore + "TOTAL");
-                frames.add(frameStart);
-                if (frameTracker > 1 && tdb.gameStatus.get(frameTracker - 2) == STATUS.STRIKE && tdb.gameStatus.get(frameTracker-1) == STATUS.STRIKE) {
-                    frames.get(frameTracker - 2).scoreToCount = tdb.totalScore - roll2;
-                    tdb.totalScore = frames.get(frameTracker - 2).scoreToCount + roll1 + roll2 + 10;
+                HandleNormal.handle_normal(tdb,frameStart,roll1,roll2,frames);
+                if (FrameCombinations.strike_strike(frameTracker, tdb)) {
+                    HandleFrameCombos.handle_strike_strike_spare(frames, frameTracker,tdb, roll2, roll1);
                 }
             }
         }
