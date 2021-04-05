@@ -2,6 +2,7 @@ package com.tietoEVRY2.bowling.game;
 
 import com.tietoEVRY2.bowling.util.CheckPlayerExistance;
 import com.tietoEVRY2.bowling.util.ConsoleOutputConfig;
+import com.tietoEVRY2.bowling.util.ConsolePlayerSpare;
 import com.tietoEVRY2.bowling.util.ConsolePlayerStrike;
 import org.apache.commons.lang3.ObjectUtils;
 
@@ -38,13 +39,7 @@ public class ConsoleBowling {
                     ConsolePlayerStrike.console_strike_case(realPlayer,throwsMade,STRIKES_TABLE_SCORE,STRIKES_TABLE);
                 }
                 else if (realPlayer.getFrames().get(throwsMade).roll1 + realPlayer.getFrames().get(throwsMade).roll2 == 10){
-                    if (realPlayer.getFrames().get(throwsMade).scoreToCount == 0) {
-                        System.out.format(SPARE_TABLE_SCORE, "Frame nr " + throwsMade, realPlayer.getFrames().get(throwsMade).roll1,
-                                "/", " ");
-                    } else {
-                        System.out.format(SPARE_TABLE, "Frame nr " + throwsMade, realPlayer.getFrames().get(throwsMade).roll1,
-                                "/", realPlayer.getFrames().get(throwsMade).scoreToCount);
-                    }
+                    ConsolePlayerSpare.console_spare_case(realPlayer,throwsMade);
                 }
                 else {
                     System.out.format(ConsoleOutputConfig.NORMAL_TABLE, "Frame nr " + throwsMade, realPlayer.getFrames().get(throwsMade).roll1,
