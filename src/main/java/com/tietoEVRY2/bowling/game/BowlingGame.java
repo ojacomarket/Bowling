@@ -39,7 +39,7 @@ public class BowlingGame {
 
     public int showCurrentScore(BowlingGame bowling, String forWhom) {
         int score = 0;
-        DisplayScoreOrThrowException.validateScoreTable(score, bowling, forWhom);
+        score = DisplayScoreOrThrowException.printCurrentScore(score, bowling, forWhom);
         return score;
     }
 }
