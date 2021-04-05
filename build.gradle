@@ -30,3 +30,9 @@ dependencies {
 test {
 	useJUnitPlatform()
 }
+
+jar {
+	manifest {
+		attributes 'TietoBowling': 'com.tietoEVRY2.bowling.TietoBowling'
+	}
+}
