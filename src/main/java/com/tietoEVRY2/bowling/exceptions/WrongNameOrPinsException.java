@@ -1,4 +1,4 @@
-package com.tietoEVRY2.bowling;
+package com.tietoEVRY2.bowling.exceptions;
 
 public class WrongNameOrPinsException extends RuntimeException{
     public WrongNameOrPinsException(String message) {
