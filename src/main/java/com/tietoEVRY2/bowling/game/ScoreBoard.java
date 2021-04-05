@@ -18,7 +18,7 @@ public class ScoreBoard {
     private List<TABLE_DATABASE> currentScores;
     private TABLE_DATABASE tdb;
 
-    public void throwSingleBall(int roll1, int roll2) throws FrameScoreOutOfBoundariesException {
+    public void playFrame(int roll1, int roll2) throws FrameScoreOutOfBoundariesException {
         if (frameTracker == -1) {
             tdb = new TABLE_DATABASE(new ArrayList<>(), 0);
             frames = new ArrayList<>();
