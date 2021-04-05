@@ -31,5 +31,4 @@ public class TietoBowling {
         ConsoleBowling playBowlingInConsole = new ConsoleBowling();
         playBowlingInConsole.showFullPlayerTable("Artjom", bowling.scoreBoards);
     }
-
 }
