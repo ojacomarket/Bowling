@@ -61,6 +61,10 @@ public abstract class FrameCombinations {
                 localRollFrameStatuses.get(1) == FrameStatus.NORMAL;
     }
 
+    public static boolean spare_bonus_strike(List<FrameStatus> localRollFrameStatuses, int frameNr, TotalScoreDatabase db) {
+        return db.gameFrameStatuses.get(frameNr - 1) == FrameStatus.SPARE && localRollFrameStatuses.get(0) == FrameStatus.STRIKE;
+    }
+
     public static boolean bonus_for_normal(List<FrameStatus> localRollFrameStatuses, int frameNr, TotalScoreDatabase db) {
         return localRollFrameStatuses.get(0) == FrameStatus.NORMAL && localRollFrameStatuses.get(1) == FrameStatus.NORMAL &&
                 db.gameFrameStatuses.get(frameNr - 1) == FrameStatus.NORMAL;

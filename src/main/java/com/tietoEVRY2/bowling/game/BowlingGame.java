@@ -1,7 +1,7 @@
 package com.tietoEVRY2.bowling.game;
 
 import com.tietoEVRY2.bowling.FrameScoreOutOfBoundariesException;
-import lombok.NoArgsConstructor;
+import com.tietoEVRY2.bowling.util.CheckPlayerExistance;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -42,7 +42,7 @@ public class BowlingGame {
                 .filter(x -> whoIsThrowing.equals(x.getPlayerName()))
                 .findAny()
                 .orElse(null);
-        scoreBoards.get(0).setFrameTracker(scoreBoards.get(0).getFrameTracker() +1);
+        scoreBoards.get(0).setFrameTracker(scoreBoards.get(0).getFrameTracker() + 1);
         PlayBonusGame playBonusFrame = new PlayBonusGame(scoreBoards.get(0).getTdb(), scoreBoards.get(scoreBoards.indexOf(sample)).getFrames(),
                 scoreBoards.get(0).getFrameTracker());
         playBonusFrame.playBonusFrame(roll1, roll2, roll3);
@@ -52,6 +52,11 @@ public class BowlingGame {
         playerNames.clear();
         status = GameStatus.INACTIVE;
         scoreBoards.clear();
+    }
+
+    public int showCurrentScore(BowlingGame bowling) {
+        return bowling.scoreBoards.get(bowling.scoreBoards.indexOf(
+                CheckPlayerExistance.checkExistance("Artjom", bowling.scoreBoards))).getTdb().totalScore;
     }
 }
 
