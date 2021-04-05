@@ -38,34 +38,31 @@ public class PlayBonusGame {
             localRollStatus.add(STATUS.NORMAL);
         }
         if (FrameCombinations.strike_bonus_for_spare(localRollStatus)) {
-            HandleFrameCombosBonus.handle_strike_bonus_for_spare(db,frames,frameNr,roll3);
+            HandleFrameCombosBonus.handle_strike_bonus_for_spare(db, frames, frameNr, roll3);
         }
 
-        if (FrameCombinations.strike_strike_bonus_for_strike(localRollStatus,frameNr,db)) {
-            HandleFrameCombosBonus.handle_strike_strike_bonus_for_strike(db,frames,frameNr,roll1,roll2,roll3);
-        }
-        else if (FrameCombinations.strike_bonus_for_strike(localRollStatus,frameNr,db)) {
-           HandleFrameCombosBonus.handle_strike_bonus_for_strike(db,frames,frameNr,roll1,roll2,roll3);
-        }
-        else if (db.gameStatus.get(frameNr - 1) == STATUS.SPARE && localRollStatus.get(0) == STATUS.STRIKE) {
+        if (FrameCombinations.strike_strike_bonus_for_strike(localRollStatus, frameNr, db)) {
+            HandleFrameCombosBonus.handle_strike_strike_bonus_for_strike(db, frames, frameNr, roll1, roll2, roll3);
+        } else if (FrameCombinations.strike_bonus_for_strike(localRollStatus, frameNr, db)) {
+            HandleFrameCombosBonus.handle_strike_bonus_for_strike(db, frames, frameNr, roll1, roll2, roll3);
+        } else if (db.gameStatus.get(frameNr - 1) == STATUS.SPARE && localRollStatus.get(0) == STATUS.STRIKE) {
             frames.get(frameNr - 1).scoreToCount = db.totalScore - roll2 - roll3;
             db.totalScore = frames.get(frameNr - 1).scoreToCount + 10;
             frames.get(frameNr).scoreToCount = db.totalScore + roll2 + roll3;
-        } else if (FrameCombinations.strike_strike_bonus_for_two_normals_or_single_spare(localRollStatus,frameNr,db)) {
-            HandleFrameCombosBonus.handle_strike_strike_bonus_for_two_normals_or_single_spare(db,frames,frameNr,roll1,roll2,roll3);
-        } else if (FrameCombinations.spare_bonus_for_spare(localRollStatus,frameNr,db)) {
-            HandleFrameCombosBonus.handle_spare_bonus_for_spare(db,frames,frameNr,roll2,roll3);
-        } else if (FrameCombinations.spare_bonus_for_normal(localRollStatus,frameNr,db)) {
-            HandleFrameCombosBonus.handle_spare_bonus_for_normal(db,frames,frameNr,roll1,roll2);
-        } else if (FrameCombinations.bonus_for_normal(localRollStatus,frameNr,db)) {
-            HandleFrameCombosBonus.handle_bonus_for_normal(db,frames,frameNr);
-        } else if (FrameCombinations.strike_bonus_for_normal_or_spare(localRollStatus,frameNr,db)) {
-            HandleFrameCombosBonus.handle_strike_bonus_for_normal_or_spare(db,frames,frameNr,roll1,roll2);
+        } else if (FrameCombinations.strike_strike_bonus_for_two_normals_or_single_spare(localRollStatus, frameNr, db)) {
+            HandleFrameCombosBonus.handle_strike_strike_bonus_for_two_normals_or_single_spare(db, frames, frameNr, roll1, roll2, roll3);
+        } else if (FrameCombinations.spare_bonus_for_spare(localRollStatus, frameNr, db)) {
+            HandleFrameCombosBonus.handle_spare_bonus_for_spare(db, frames, frameNr, roll2, roll3);
+        } else if (FrameCombinations.spare_bonus_for_normal(localRollStatus, frameNr, db)) {
+            HandleFrameCombosBonus.handle_spare_bonus_for_normal(db, frames, frameNr, roll1, roll2);
+        } else if (FrameCombinations.bonus_for_normal(localRollStatus, frameNr, db)) {
+            HandleFrameCombosBonus.handle_bonus_for_normal(db, frames, frameNr);
+        } else if (FrameCombinations.strike_bonus_for_normal_or_spare(localRollStatus, frameNr, db)) {
+            HandleFrameCombosBonus.handle_strike_bonus_for_normal_or_spare(db, frames, frameNr, roll1, roll2);
         } else if (FrameCombinations.bonus_for_strike(localRollStatus)) {
-            HandleFrameCombosBonus.handle_bonus_for_strike(db,frames,frameNr,roll2,roll3);
-        } else if (localRollStatus.get(0) == STATUS.NORMAL && localRollStatus.get(1) == STATUS.SPARE) {
-            frames.get(frameNr).scoreToCount = db.totalScore;
-            db.totalScore = frames.get(frameNr).scoreToCount + 10;
+            HandleFrameCombosBonus.handle_bonus_for_strike(db, frames, frameNr, roll2, roll3);
+        } else if (FrameCombinations.bonus_for_spare(localRollStatus)) {
+            HandleFrameCombosBonus.handle_bonus_for_spare(db, frames, frameNr);
         }
     }
 }
