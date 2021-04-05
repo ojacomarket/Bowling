@@ -41,13 +41,8 @@ public class PlayBonusGame {
             HandleFrameCombosBonus.handle_strike_spare_bonus(db,frames,frameNr,roll3);
         }
 
-        if (db.gameStatus.get(frameNr - 2) == STATUS.STRIKE && db.gameStatus.get(frameNr - 1) == STATUS.STRIKE &&
-                localRollStatus.get(0) == STATUS.STRIKE) {
-            frames.get(frameNr - 2).scoreToCount = db.totalScore - roll3 - roll2;
-            db.totalScore = frames.get(frameNr - 2).scoreToCount + roll1 + 10 + roll2 + roll3;
-            frames.get(frameNr-1).scoreToCount = db.totalScore - roll3;
-            db.totalScore = frames.get(frameNr - 1).scoreToCount + roll1 + roll2 + roll3 ;
-            frames.get(frameNr).scoreToCount = db.totalScore;
+        if (FrameCombinations.strike_strike_strike_bonusFrame(localRollStatus,frameNr,db)) {
+            HandleFrameCombosBonus.handle_strike_strike_strike_bonus(db,frames,frameNr,roll1,roll2,roll3);
         }
         else if (db.gameStatus.get(frameNr - 1) == STATUS.STRIKE && localRollStatus.get(0) == STATUS.STRIKE) {
             frames.get(frameNr - 1).scoreToCount = db.totalScore - roll3;
