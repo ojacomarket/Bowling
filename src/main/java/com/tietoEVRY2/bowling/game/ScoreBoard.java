@@ -1,6 +1,7 @@
 package com.tietoEVRY2.bowling.game;
 
 import com.tietoEVRY2.bowling.FrameScoreOutOfBoundariesException;
+import com.tietoEVRY2.bowling.util.FrameCombinations;
 import lombok.*;
 
 import java.util.ArrayList;
@@ -65,7 +66,7 @@ public class ScoreBoard {
             frameStart.scoreToCount = 0;
             frames.add(frameStart);
             tdb.totalScore += 10;
-            if (frameTracker > 1 && tdb.gameStatus.get(frameTracker - 2) == STATUS.STRIKE && tdb.gameStatus.get(frameTracker-1) == STATUS.STRIKE) {
+            if (FrameCombinations.strike_strike(frameTracker, tdb)) {
                 frames.get(frameTracker - 2).scoreToCount = tdb.totalScore;
                 tdb.totalScore = frames.get(frameTracker - 2).scoreToCount + 20;
             }
