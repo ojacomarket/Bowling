@@ -1,11 +1,12 @@
 package com.tietoEVRY2.bowling.game;
 
-import com.tietoEVRY2.bowling.FrameScoreOutOfBoundariesException;
-import com.tietoEVRY2.bowling.util.*;
+import com.tietoEVRY2.bowling.WrongNameOrPinsException;
 import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.tietoEVRY2.bowling.Scoring.*;
 
 @Getter
 @Setter
@@ -18,7 +19,7 @@ public class ScoreBoard {
     private List<TotalScoreDatabase> currentScores;
     private TotalScoreDatabase tdb;
 
-    public void playFrame(int roll1, int roll2) throws FrameScoreOutOfBoundariesException {
+    public void playFrame(int roll1, int roll2) throws WrongNameOrPinsException {
         if (frameTracker == -1) {
             tdb = new TotalScoreDatabase(new ArrayList<>(), 0);
             frames = new ArrayList<>();
@@ -28,42 +29,10 @@ public class ScoreBoard {
         if (frameTracker > 9) {
             return;
         }
-        if (roll1 + roll2 > 10) {
-            throw new FrameScoreOutOfBoundariesException();
-        }
         Frames frameStart = new Frames();
         frameStart.roll1 = roll1;
-        if (roll1 == 10) {
-            HandleStrike.handle_strike(tdb, frameStart, roll2, frames);
-            if (FrameCombinations.strike_strike(frameTracker, tdb)) {
-                HandleFrameCombos.handle_strike_strike_strike(frames, frameTracker, tdb);
-            }
-        } else {
-            if (roll1 + roll2 == 10) {
-                HandleSpare.handle_spare(tdb, frameStart, roll2, frames);
-                if (FrameCombinations.strike_strike(frameTracker, tdb)) {
-                    HandleFrameCombos.handle_strike_strike_spare(frames, frameTracker, tdb, roll2, roll1);
-                }
-            } else {
-                HandleNormal.handle_normal(tdb, frameStart, roll1, roll2, frames);
-                if (FrameCombinations.strike_strike(frameTracker, tdb)) {
-                    HandleFrameCombos.handle_strike_strike_spare(frames, frameTracker, tdb, roll2, roll1);
-                }
-            }
-        }
-        if (frameTracker >= 1) {
-            if (FrameCombinations.strike_spare(frameTracker, tdb)) {
-                HandleFrameCombos.handle_strike_spare(frames, frameTracker, tdb);
-            } else if (FrameCombinations.strike_normal(frameTracker, tdb)) {
-                HandleFrameCombos.handle_strike_normal(frames, frameTracker, tdb, roll1, roll2);
-            } else if (FrameCombinations.spare_normal(frameTracker, tdb)) {
-                HandleFrameCombos.handle_spare_normal(frames, frameTracker, tdb, roll1, roll2);
-            } else if (FrameCombinations.spare_strike(frameTracker, tdb)) {
-                HandleFrameCombos.handle_spare_strike(frames, frameTracker, tdb);
-            } else if (FrameCombinations.spare_spare(frameTracker, tdb)) {
-                HandleFrameCombos.handle_spare_spare(frames, frameTracker, tdb, roll2);
-            }
-        }
+        assessSingularFrame(roll1, roll2, tdb, frameStart, frameTracker, frames);
+        predictCalculations(roll1, roll2, tdb, frameTracker, frames);
         currentScores.add(tdb);
     }
 }
