@@ -1,10 +1,10 @@
 package com.tietoEVRY2.bowling.game;
 
-import com.tietoEVRY2.bowling.util.DisplayScoreOrThrowException;
+import com.tietoEVRY2.bowling.util.validations.DisplayScoreOrThrowException;
 
 import java.util.*;
 
-import static com.tietoEVRY2.bowling.util.CheckPlayerExistance.*;
+import static com.tietoEVRY2.bowling.util.validations.CheckPlayerExistance.*;
 
 public class BowlingGame {
     public static GameStatus status;

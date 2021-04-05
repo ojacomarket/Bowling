@@ -6,7 +6,7 @@ import lombok.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.tietoEVRY2.bowling.util.Scoring.*;
+import static com.tietoEVRY2.bowling.util.validations.Scoring.*;
 
 @Getter
 @Setter

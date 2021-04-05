@@ -4,7 +4,7 @@ import org.apache.commons.lang3.ObjectUtils;
 
 import java.util.List;
 
-import static com.tietoEVRY2.bowling.util.CheckPlayerExistance.checkExistance;
+import static com.tietoEVRY2.bowling.util.validations.CheckPlayerExistance.checkExistance;
 import static com.tietoEVRY2.bowling.util.console.ConsoleDrawer.*;
 
 public class ConsoleBowling {

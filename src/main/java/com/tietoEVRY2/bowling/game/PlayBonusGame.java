@@ -5,7 +5,7 @@ import lombok.AllArgsConstructor;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.tietoEVRY2.bowling.util.ManageFrameStatusesBonus.*;
+import static com.tietoEVRY2.bowling.util.validations.ManageFrameStatusesBonus.*;
 
 @AllArgsConstructor
 public class PlayBonusGame {
