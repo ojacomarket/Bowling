@@ -1,4 +1,4 @@
-package com.tietoEVRY2.bowling.util;
+package com.tietoEVRY2.bowling.util.validations;
 
 import com.tietoEVRY2.bowling.game.FrameStatus;
 import com.tietoEVRY2.bowling.game.TotalScoreDatabase;

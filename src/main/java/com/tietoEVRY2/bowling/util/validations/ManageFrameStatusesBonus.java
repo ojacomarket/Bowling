@@ -1,13 +1,12 @@
-package com.tietoEVRY2.bowling.util;
+package com.tietoEVRY2.bowling.util.validations;
 
 import com.tietoEVRY2.bowling.game.FrameStatus;
 import com.tietoEVRY2.bowling.game.Frames;
-import com.tietoEVRY2.bowling.game.GameStatus;
 import com.tietoEVRY2.bowling.game.TotalScoreDatabase;
 
 import java.util.List;
 
-import static com.tietoEVRY2.bowling.util.BonusFrameSuperCheck.superCheck;
+import static com.tietoEVRY2.bowling.util.validations.BonusFrameSuperCheck.superCheck;
 
 public abstract class ManageFrameStatusesBonus {
     public static void checkFirstRoll(int roll1, List<FrameStatus> localRollFrameStatuses) {

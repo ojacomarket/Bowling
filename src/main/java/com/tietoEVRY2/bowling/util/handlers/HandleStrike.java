@@ -1,4 +1,4 @@
-package com.tietoEVRY2.bowling.util;
+package com.tietoEVRY2.bowling.util.handlers;
 
 import com.tietoEVRY2.bowling.game.Frames;
 import com.tietoEVRY2.bowling.game.FrameStatus;
