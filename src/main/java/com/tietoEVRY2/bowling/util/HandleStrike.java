@@ -6,7 +6,7 @@ import com.tietoEVRY2.bowling.game.TABLE_DATABASE;
 
 import java.util.List;
 
-public class HandleStrike {
+public abstract class HandleStrike {
     public static void handle_strike (TABLE_DATABASE tdb, Frames frameStart, int roll2, List<Frames> frames) {
         tdb.gameStatus.add(STATUS.STRIKE);
         roll2 = 0;
