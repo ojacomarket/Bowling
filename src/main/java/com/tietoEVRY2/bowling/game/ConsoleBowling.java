@@ -1,41 +1,30 @@
 package com.tietoEVRY2.bowling.game;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-
 import java.util.List;
 
-//@AllArgsConstructor
-@Data
 public class ConsoleBowling {
 
     public String name;
     public List<Frames> frames;
     public int frameNr = 5;
+    private List<ScoreBoard> scoreBoards;
 
-    public void playBowlingInConsole() {
-        String playerTableConsole = "| %-15s | %-7d | %-7s| %-7s| %n";
+    public void showFullPlayerTable(String player, List<ScoreBoard> scoreBoardsIncoming) {
 
-        System.out.format("+-----------------+---------+--------+--------+%n");
-        System.out.format("| Player name     | Roll1   | Roll2  | Total  |%n");
-        System.out.format("+-----------------+---------+--------+--------+%n");
-
-           /* System.out.format(playerTableConsole, name, frames.get(whichPlayer).roll1,
-                    frames.get(whichPlayer).roll2,frames.get(whichPlayer).scoreToCount );
-*/
-        System.out.format("+-----------------+---------+--------+--------+%n");
-    }
-    public void showFullPlayerTable(String player, List<ScoreBoard> scoreBoards) {
+        scoreBoards = scoreBoardsIncoming;
         String playerFullTableConsole = "| %-15s | %-7d | %-7d| %-7d| %n";
         String playerFullTableConsole2 = "| %-15s | %-7s | %-7s| %-7d| %n";
         String playerFullTableConsole3 = "| %-15s | %-7d | %-7s| %-7d| %n";
         String playerFullTableConsole4 = "| %-15s | %-7d | %-7s| %-7s| %n";
         String playerFullTableConsole5 = "| %-15s | %-7s | %-7s| %-7s| %n";
-        String strike;
-        String spare;
+        String bonus = "| %-15s | %-7s | %-7s| %-7s| %-7s| %n";
 
         System.out.format("+-----------------+---------+--------+--------+%n");
-        System.out.format("| %s          | Roll1   | Roll2  | Total  |%n", "Artjom");
+        if (scoreBoardsIncoming.get(0).getFrameTracker() > 7) {
+            System.out.format("| %s          | Roll1   | Roll2  | Roll3  | Total  |%n", "Artjom");
+        } else {
+            System.out.format("| %s          | Roll1   | Roll2  | Total  |%n", "Artjom");
+        }
         System.out.format("+-----------------+---------+--------+--------+%n");
         ScoreBoard sample = scoreBoards.stream()
                 .filter(x -> player.equals(x.getPlayerName()))
@@ -69,10 +58,11 @@ public class ConsoleBowling {
                 }
             System.out.format("+-----------------+---------+--------+--------+%n");
     }
-
-   /* public static void main(String[] args) {
-        ConsoleBowling n = new ConsoleBowling();
-        n.showFullPlayerTable();
+    /*public boolean isStrike (ScoreBoard sample, sc) {
+        sample = scoreBoards.stream()
+                .filter(x -> player.equals(x.getPlayerName()))
+                .findAny()
+                .orElse(null);
     }*/
 }
 
