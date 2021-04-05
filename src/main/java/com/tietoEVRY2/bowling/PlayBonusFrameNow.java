@@ -17,7 +17,7 @@ public class PlayBonusFrameNow {
         if (frameTracker > 8) {
             frames.add(frameStart);
             PlayBonusGame bonusFrame = new PlayBonusGame(tdb, frames, frameTracker);
-            bonusFrame.playBonusGame(roll1, roll2, roll3);
+            bonusFrame.playBonusFrame(roll1, roll2, roll3);
         }
     }
 }
