@@ -7,20 +7,21 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-@NoArgsConstructor
 public class BowlingGame {
     public static GameStatus status;
     public List<String> playerNames;
     public List<ScoreBoard> scoreBoards;
-    private List<TotalScoreDatabase> tdb;
 
     public void init(String... names) {
-
+        if (status == GameStatus.FINISH) {
+            reset();
+        }
         status = GameStatus.START;
         playerNames = new ArrayList<>();
         scoreBoards = new ArrayList<>();
         playerNames.addAll(Arrays.asList(names));
         playerNames.forEach(x -> scoreBoards.add(new ScoreBoard(x)));
+        status = GameStatus.FINISH;
     }
 
     public void throwBall(int roll1, int roll2, String whoIsThrowing) {
@@ -48,11 +49,9 @@ public class BowlingGame {
     }
 
     public void reset() {
-
         playerNames.clear();
         status = GameStatus.INACTIVE;
         scoreBoards.clear();
-        tdb.clear();
     }
 }
 
