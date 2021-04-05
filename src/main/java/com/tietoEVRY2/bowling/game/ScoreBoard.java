@@ -124,6 +124,7 @@ public class ScoreBoard {
 
         currentScores.add(tdb);
         System.out.println("And here twice!");
+
     }
 }
 
