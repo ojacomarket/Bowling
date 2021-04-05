@@ -55,12 +55,8 @@ public class PlayBonusGame {
             HandleFrameCombosBonus.handle_strike_strike_bonus_for_two_normals_or_single_spare(db,frames,frameNr,roll1,roll2,roll3);
         } else if (FrameCombinations.spare_bonus_for_spare(localRollStatus,frameNr,db)) {
             HandleFrameCombosBonus.handle_spare_bonus_for_spare(db,frames,frameNr,roll2,roll3);
-        } else if (db.gameStatus.get(frameNr - 1) == STATUS.SPARE &&
-                localRollStatus.get(1) == STATUS.NORMAL) {
-            frames.get(frameNr - 1).scoreToCount = db.totalScore - roll2;
-            db.totalScore = frames.get(frameNr - 1).scoreToCount + roll1 + roll2;
-            frames.get(frameNr).scoreToCount = db.totalScore;
-            db.totalScore = frames.get(frameNr).scoreToCount;
+        } else if (FrameCombinations.spare_bonus_for_normal(localRollStatus,frameNr,db)) {
+            HandleFrameCombosBonus.handle_spare_bonus_for_normal(db,frames,frameNr,roll1,roll2,roll3);
         } else if (localRollStatus.get(0) == STATUS.NORMAL && localRollStatus.get(1) == STATUS.NORMAL &&
                 db.gameStatus.get(frameNr - 1) == STATUS.NORMAL) {
             frames.get(frameNr).scoreToCount = db.totalScore;
