@@ -6,7 +6,7 @@ import com.tietoEVRY2.bowling.game.TABLE_DATABASE;
 
 import java.util.List;
 
-public class HandleNormal {
+public abstract class HandleNormal {
     public static void handle_normal (TABLE_DATABASE tdb, Frames frameStart, int roll1, int roll2, List<Frames> frames) {
         tdb.gameStatus.add(STATUS.NORMAL);
         frameStart.roll2 = roll2;
