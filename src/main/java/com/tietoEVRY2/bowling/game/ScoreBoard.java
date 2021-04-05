@@ -32,7 +32,6 @@ public class ScoreBoard {
             throw new FrameScoreOutOfBoundariesException();
         }
         Frames frameStart = new Frames();
-
         frameStart.roll1 = roll1;
         if (roll1 == 10) {
             HandleStrike.handle_strike(tdb, frameStart, roll2, frames);
@@ -52,7 +51,6 @@ public class ScoreBoard {
                 }
             }
         }
-
         if (frameTracker >= 1) {
             if (FrameCombinations.strike_spare(frameTracker, tdb)) {
                 HandleFrameCombos.handle_strike_spare(frames, frameTracker, tdb);
@@ -67,7 +65,5 @@ public class ScoreBoard {
             }
         }
         currentScores.add(tdb);
-
     }
 }
-
