@@ -25,7 +25,6 @@ public class PlayBonusGame {
             localRollStatus.add(STATUS.NORMAL);
 
         }
-
         frames.get(frameNr).roll2 = roll2;
         db.totalScore += roll2;
         if (roll1 + roll2 == 10) {
@@ -40,7 +39,6 @@ public class PlayBonusGame {
         if (FrameCombinations.strike_bonus_for_spare(localRollStatus)) {
             HandleFrameCombosBonus.handle_strike_bonus_for_spare(db, frames, frameNr, roll3);
         }
-
         if (FrameCombinations.strike_strike_bonus_for_strike(localRollStatus, frameNr, db)) {
             HandleFrameCombosBonus.handle_strike_strike_bonus_for_strike(db, frames, frameNr, roll1, roll2, roll3);
         } else if (FrameCombinations.strike_bonus_for_strike(localRollStatus, frameNr, db)) {
@@ -66,4 +64,3 @@ public class PlayBonusGame {
         }
     }
 }
-
