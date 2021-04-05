@@ -56,9 +56,8 @@ public class ScoreBoard {
         }
 
         if (frameTracker >= 1) {
-                if (tdb.gameStatus.get(frameTracker - 1) == STATUS.STRIKE && tdb.gameStatus.get(frameTracker) == STATUS.SPARE) {
-                    frames.get(frameTracker - 1).scoreToCount = tdb.totalScore;
-                    tdb.totalScore = frames.get(frameTracker - 1).scoreToCount + 10;
+                if (FrameCombinations.strike_spare(frameTracker,tdb)) {
+                    HandleFrameCombos.handle_strike_spare(frames,frameTracker,tdb);
                 } else if (tdb.gameStatus.get(frameTracker - 1) == STATUS.STRIKE && tdb.gameStatus.get(frameTracker) == STATUS.NORMAL) {
                     frames.get(frameTracker - 1).scoreToCount = tdb.totalScore;
                     tdb.totalScore = frames.get(frameTracker - 1).scoreToCount + roll1 + roll2;
