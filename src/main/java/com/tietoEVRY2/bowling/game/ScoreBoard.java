@@ -60,10 +60,8 @@ public class ScoreBoard {
                     HandleFrameCombos.handle_strike_spare(frames,frameTracker,tdb);
                 } else if (FrameCombinations.strike_normal(frameTracker,tdb)) {
                     HandleFrameCombos.handle_strike_normal(frames,frameTracker,tdb,roll1,roll2);
-                } else if (tdb.gameStatus.get(frameTracker - 1) == STATUS.SPARE && tdb.gameStatus.get(frameTracker) == STATUS.NORMAL) {
-                    frames.get(frameTracker - 1).scoreToCount = tdb.totalScore - roll2;
-                    tdb.totalScore = frames.get(frameTracker - 1).scoreToCount + roll1 + roll2;
-                    frames.get(frameTracker).scoreToCount = tdb.totalScore;
+                } else if (FrameCombinations.spare_normal(frameTracker,tdb)) {
+                 HandleFrameCombos.handle_spare_normal(frames,frameTracker,tdb,roll1,roll2);
                     //totalScore.total += roll1 + 10;
                 } else if (tdb.gameStatus.get(frameTracker - 1) == STATUS.SPARE && tdb.gameStatus.get(frameTracker) == STATUS.STRIKE) {
                     frames.get(frameTracker - 1).scoreToCount = tdb.totalScore;
