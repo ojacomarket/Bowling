@@ -41,6 +41,7 @@ public class BowlingGame {
                 .filter(x -> whoIsThrowing.equals(x.getPlayerName()))
                 .findAny()
                 .orElse(null);
+        scoreBoards.get(0).setFrameTracker(scoreBoards.get(0).getFrameTracker() +1);
         PlayBonusGame playBonusFrame = new PlayBonusGame(scoreBoards.get(0).getTdb(), scoreBoards.get(scoreBoards.indexOf(sample)).getFrames(),
                 scoreBoards.get(0).getFrameTracker());
         playBonusFrame.playBonusGame(roll1, roll2, roll3);
