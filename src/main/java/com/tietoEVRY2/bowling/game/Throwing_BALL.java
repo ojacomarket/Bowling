@@ -1,7 +1,7 @@
 package com.tietoEVRY2.bowling.game;
 
 import java.util.Random;
-
+@Deprecated
 public class Throwing_BALL {
     public static int throwBall (int roll, int secondRollValue) {
         if (roll == 1) {

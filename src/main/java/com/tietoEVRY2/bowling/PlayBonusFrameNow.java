@@ -2,7 +2,7 @@ package com.tietoEVRY2.bowling;
 
 import com.tietoEVRY2.bowling.game.Frames;
 import com.tietoEVRY2.bowling.game.PlayBonusGame;
-import com.tietoEVRY2.bowling.game.TABLE_DATABASE;
+import com.tietoEVRY2.bowling.game.TotalScoreDatabase;
 import lombok.AllArgsConstructor;
 
 import java.util.List;
@@ -10,7 +10,7 @@ import java.util.List;
 public class PlayBonusFrameNow {
     private int frameTracker;
     private List<Frames> frames;
-    private TABLE_DATABASE tdb;
+    private TotalScoreDatabase tdb;
 
     public void lastFrame(int roll1, int roll2, int roll3) {
         Frames frameStart = new Frames();

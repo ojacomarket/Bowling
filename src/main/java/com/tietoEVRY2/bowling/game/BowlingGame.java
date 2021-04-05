@@ -12,7 +12,7 @@ public class BowlingGame {
     public static GameStatus status;
     public List<String> playerNames;
     public List<ScoreBoard> scoreBoards;
-    private List<TABLE_DATABASE> tdb;
+    private List<TotalScoreDatabase> tdb;
 
     public void init(String... names) {
 

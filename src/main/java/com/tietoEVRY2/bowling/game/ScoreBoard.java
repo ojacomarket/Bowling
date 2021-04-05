@@ -15,12 +15,12 @@ public class ScoreBoard {
     private String playerName;
     private List<Frames> frames;
     private int frameTracker = -1;
-    private List<TABLE_DATABASE> currentScores;
-    private TABLE_DATABASE tdb;
+    private List<TotalScoreDatabase> currentScores;
+    private TotalScoreDatabase tdb;
 
     public void playFrame(int roll1, int roll2) throws FrameScoreOutOfBoundariesException {
         if (frameTracker == -1) {
-            tdb = new TABLE_DATABASE(new ArrayList<>(), 0);
+            tdb = new TotalScoreDatabase(new ArrayList<>(), 0);
             frames = new ArrayList<>();
             currentScores = new ArrayList<>();
         }
