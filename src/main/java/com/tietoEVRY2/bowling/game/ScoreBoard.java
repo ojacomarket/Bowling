@@ -39,36 +39,33 @@ public class ScoreBoard {
             if (FrameCombinations.strike_strike(frameTracker, tdb)) {
                 HandleFrameCombos.handle_strike_strike_strike(frames, frameTracker, tdb);
             }
-            }
-
-        else {
+        } else {
             if (roll1 + roll2 == 10) {
-                HandleSpare.handle_spare(tdb,frameStart,roll2,frames);
+                HandleSpare.handle_spare(tdb, frameStart, roll2, frames);
                 if (FrameCombinations.strike_strike(frameTracker, tdb)) {
-                    HandleFrameCombos.handle_strike_strike_spare(frames,frameTracker,tdb,roll2,roll1);
+                    HandleFrameCombos.handle_strike_strike_spare(frames, frameTracker, tdb, roll2, roll1);
                 }
             } else {
-                HandleNormal.handle_normal(tdb,frameStart,roll1,roll2,frames);
+                HandleNormal.handle_normal(tdb, frameStart, roll1, roll2, frames);
                 if (FrameCombinations.strike_strike(frameTracker, tdb)) {
-                    HandleFrameCombos.handle_strike_strike_spare(frames, frameTracker,tdb, roll2, roll1);
+                    HandleFrameCombos.handle_strike_strike_spare(frames, frameTracker, tdb, roll2, roll1);
                 }
             }
         }
 
         if (frameTracker >= 1) {
-                if (FrameCombinations.strike_spare(frameTracker,tdb)) {
-                    HandleFrameCombos.handle_strike_spare(frames,frameTracker,tdb);
-                } else if (FrameCombinations.strike_normal(frameTracker,tdb)) {
-                    HandleFrameCombos.handle_strike_normal(frames,frameTracker,tdb,roll1,roll2);
-                } else if (FrameCombinations.spare_normal(frameTracker,tdb)) {
-                 HandleFrameCombos.handle_spare_normal(frames,frameTracker,tdb,roll1,roll2);
-                } else if (FrameCombinations.spare_strike(frameTracker,tdb)) {
-                    HandleFrameCombos.handle_spare_strike(frames,frameTracker,tdb);
-                } else if (tdb.gameStatus.get(frameTracker - 1) == STATUS.SPARE && tdb.gameStatus.get(frameTracker) == STATUS.SPARE) {
-                    frames.get(frameTracker - 1).scoreToCount = tdb.totalScore - roll2;
-                    tdb.totalScore = frames.get(frameTracker - 1).scoreToCount + 10;
-                }
+            if (FrameCombinations.strike_spare(frameTracker, tdb)) {
+                HandleFrameCombos.handle_strike_spare(frames, frameTracker, tdb);
+            } else if (FrameCombinations.strike_normal(frameTracker, tdb)) {
+                HandleFrameCombos.handle_strike_normal(frames, frameTracker, tdb, roll1, roll2);
+            } else if (FrameCombinations.spare_normal(frameTracker, tdb)) {
+                HandleFrameCombos.handle_spare_normal(frames, frameTracker, tdb, roll1, roll2);
+            } else if (FrameCombinations.spare_strike(frameTracker, tdb)) {
+                HandleFrameCombos.handle_spare_strike(frames, frameTracker, tdb);
+            } else if (FrameCombinations.spare_spare(frameTracker, tdb)) {
+                HandleFrameCombos.handle_spare_spare(frames, frameTracker, tdb, roll2);
             }
+        }
         currentScores.add(tdb);
 
     }
