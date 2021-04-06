@@ -2,7 +2,7 @@
 ## This code was a part of interview test 
 
 ### :hammer:Technical description:
-**Project is runnable wherever JVM is installed:**
+**Project is runnable wherever JVM is installed**
 
 ### :dart:What it does?
 - Ability to throw a ball and down the pins
