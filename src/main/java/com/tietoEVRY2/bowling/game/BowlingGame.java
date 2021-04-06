@@ -1,26 +1,33 @@
 package com.tietoEVRY2.bowling.game;
 
+import com.tietoEVRY2.bowling.exceptions.PlayerNotFoundException;
 import com.tietoEVRY2.bowling.util.validations.DisplayScoreOrThrowException;
+import org.apache.commons.lang3.ObjectUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.*;
 
 import static com.tietoEVRY2.bowling.util.validations.CheckPlayerExistance.*;
 
 public class BowlingGame {
-    public static GameStatus status;
+   // public static GameStatus status;
     public List<String> playerNames;
     public List<ScoreBoard> scoreBoards;
 
     public void init(String... names) {
-        if (status == GameStatus.FINISH) {
+        /*if (status == GameStatus.FINISH) {
             reset();
+        }*/
+        try {
+            //status = GameStatus.START;
+            playerNames = new ArrayList<>();
+            scoreBoards = new ArrayList<>();
+            playerNames.addAll(Arrays.asList(names));
+            playerNames.forEach(x -> scoreBoards.add(new ScoreBoard(x)));
+            //status = GameStatus.FINISH;
+        } catch (NullPointerException npe) {
+            return;
         }
-        status = GameStatus.START;
-        playerNames = new ArrayList<>();
-        scoreBoards = new ArrayList<>();
-        playerNames.addAll(Arrays.asList(names));
-        playerNames.forEach(x -> scoreBoards.add(new ScoreBoard(x)));
-        status = GameStatus.FINISH;
     }
 
     public void throwBall(int roll1, int roll2, String whoIsThrowing) {
@@ -31,11 +38,11 @@ public class BowlingGame {
         checkPlayerValidityBonus(roll1, roll2, roll3, whoIsThrowing, playerNames, scoreBoards);
     }
 
-    public void reset() {
+/*    public void reset() {
         playerNames.clear();
         status = GameStatus.INACTIVE;
         scoreBoards.clear();
-    }
+    }*/
 
     public int showCurrentScore(BowlingGame bowling, String forWhom) {
         int score = 0;

@@ -23,6 +23,7 @@ public abstract class HandleFrameCombosBonus {
         frames.get(frameNr - 1).scoreToCount = db.totalScore - roll3;
         db.totalScore = frames.get(frameNr - 1).scoreToCount + roll1 + roll2;
         frames.get(frameNr).scoreToCount = db.totalScore + roll3;
+        db.totalScore = frames.get(frameNr).scoreToCount;
     }
 
     public static void handle_strike_strike_bonus_for_two_normals_or_single_spare(TotalScoreDatabase db, List<Frames> frames, int frameNr, int roll1, int roll2, int roll3) {
@@ -62,11 +63,12 @@ public abstract class HandleFrameCombosBonus {
         frames.get(frameNr - 1).scoreToCount = db.totalScore - roll2 - roll3;
         db.totalScore = frames.get(frameNr - 1).scoreToCount + 10;
         frames.get(frameNr).scoreToCount = db.totalScore + roll2 + roll3;
+        db.totalScore = frames.get(frameNr).scoreToCount;
     }
 
     public static void handle_bonus_for_strike(TotalScoreDatabase db, List<Frames> frames, int frameNr, int roll2, int roll3) {
         frames.get(frameNr).scoreToCount = db.totalScore;
-        db.totalScore = frames.get(frameNr).scoreToCount + roll2 + roll3;
+        db.totalScore = frames.get(frameNr).scoreToCount;
     }
 
     public static void handle_bonus_for_spare(TotalScoreDatabase db, List<Frames> frames, int frameNr) {

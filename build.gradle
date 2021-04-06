@@ -8,6 +8,8 @@ group = 'com.tietoEVRY2'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
 
+
+
 configurations {
 	compileOnly {
 		extendsFrom annotationProcessor
@@ -25,14 +27,17 @@ dependencies {
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	compile fileTree(dir: 'library', include: '*.jar')
 }
 
 test {
 	useJUnitPlatform()
-}
 
-jar {
-	manifest {
-		attributes 'TietoBowling': 'com.tietoEVRY2.bowling.TietoBowling'
 	}
-}
+
+
+	jar {
+		manifest {
+			attributes 'TietoBowling': 'com.tietoEVRY2.bowling.TietoBowling'
+		}
+	}
